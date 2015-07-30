@@ -20,7 +20,6 @@ GulpRunner.prototype.run = function(tasks, options, cb) {
   if (typeof options === 'function' && !cb) {
     cb = options;
     options = {}
-    console.log(cb, options)
   }
 
   if (!cb) {
@@ -31,7 +30,7 @@ GulpRunner.prototype.run = function(tasks, options, cb) {
   options.gulpfile = this.gulpfile;
   tasks = util.isArray(tasks) ? tasks : [tasks];
 
-  var gulpBin = path.resolve(__dirname, 'node_modules/gulp/bin/gulp.js')
+  var gulpBin = require.resolve('gulp/bin/gulp.js')
   var gulp = child.spawn(gulpBin, buildOpts(tasks, options), {
     detached: true,
     cwd: __dirname

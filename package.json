@@ -1,0 +1,16 @@
+{
+  "name": "gulp-runner",
+  "version": "0.1.0",
+  "description": "Programmatic API for running gulp tasks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jon Jaques <jaquers@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "decamelize": "^1.0.0",
+    "extend": "^3.0.0",
+    "gulp": "^3.9.0"
+  }
+}

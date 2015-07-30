@@ -13,7 +13,8 @@ var gulp = new GulpRunner('gulpfile.js');
 
 ### Simple Callback
 ```
-gulp.run(['task1', 'task2'], {/* gulp cli options (camelcased) */}, function(err) {
+var opts = {/* gulp cli options (camelcased) */};
+gulp.run(['task1', 'task2'], opts, function(err) {
   // done!
 })
 
@@ -21,27 +22,31 @@ gulp.run(['task1', 'task2'], {/* gulp cli options (camelcased) */}, function(err
 
 ### Event Emitter interface
 
+Note: You can call `run()` many times with the same instance,
+but there will be no distinction between events. 
+Best to use a new instance, or just pass an array of tasks.
+
 ```
 // Need to bind your events before calling run()
-runner.on('start', function() {
+gulp.on('start', function() {
   console.log('gulp starting...')
 })
 
-runner.on('complete', function() {
+gulp.on('complete', function() {
   console.log('complete!')
 })
 
-runner.on('log', function(data) {
+gulp.on('log', function(data) {
   console.log(data)
 })
 
-runner.on('error', function(err) {
+gulp.on('error', function(err) {
   console.error(err)
 })
 
-runner.on('failed', function() {
+gulp.on('failed', function() {
   console.log('failed. oh no!')
 })
 
-runner.run('default')
+gulp.run('default')
 ```

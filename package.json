@@ -1,6 +1,6 @@
 {
   "name": "gulp-runner",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Programmatic API for running gulp tasks.",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,9 @@
   },
   "author": "Jon Jaques <jaquers@gmail.com>",
   "license": "MIT",
+  "repository" :
+  { "type" : "git", 
+    "url" : "https://github.com/jonjaques/gulp-runner.git" },
   "dependencies": {
     "decamelize": "^1.0.0",
     "extend": "^3.0.0",

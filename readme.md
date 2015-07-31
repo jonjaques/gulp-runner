@@ -13,9 +13,26 @@ var gulp = new GulpRunner('gulpfile.js');
 
 ### Simple Callback
 ```
-var opts = {/* gulp cli options (camelcased) */};
+gulp.run('task', function(err) {
+  // complete if no error
+})
+```
+
+### CLI Options
+
+```
+/* optional cli arguments (camelcased) */
+var opts = {
+  require: ['coffeescript', 'some-lib'],
+  tasksSimple: true,
+  production: true   // also accepts arbitrary flags 
+                     // for use within your tasks
+};
+
+// equivalent of calling 
+// gulp task1 task2 --require 'coffeescript' --require 'some-lib' --tasks-simple --production
 gulp.run(['task1', 'task2'], opts, function(err) {
-  // done!
+  // complete!
 })
 
 ```
@@ -36,12 +53,14 @@ gulp.on('complete', function() {
   console.log('complete!')
 })
 
-gulp.on('log', function(data) {
-  console.log(data)
+gulp.on('log', function(data: Buffer) {
+  // console.log(data.toString())
+  // works better to 
+  process.stdout.write(data);
 })
 
-gulp.on('error', function(err) {
-  console.error(err)
+gulp.on('error', function(err: Buffer) {
+  process.stderr.write(err);
 })
 
 gulp.on('failed', function() {

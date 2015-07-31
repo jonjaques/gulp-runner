@@ -26,7 +26,7 @@ GulpRunner.prototype.run = function(tasks, options, cb) {
     cb = function(){}
   }
 
-  options = (options || {})
+  options = options || (options = {})
   options.gulpfile = this.gulpfile;
   tasks = util.isArray(tasks) ? tasks : [tasks];
 
@@ -38,13 +38,9 @@ GulpRunner.prototype.run = function(tasks, options, cb) {
   
   self.emit('start');
   
-  gulp.stdout.on('data', function(data) {
-    self.emit('log', data.toString())
-  })
+  gulp.stdout.on('data', reemit.bind(this)('log'))
 
-  gulp.stderr.on('data', function(data) {
-    self.emit('error', data)
-  })
+  gulp.stderr.on('data', reemit.bind(this)('error'))
 
   gulp.on('close', function(code) {
     if (code !== 0) {
@@ -55,8 +51,14 @@ GulpRunner.prototype.run = function(tasks, options, cb) {
       cb(null)
     }
   });
-
 };
+
+function reemit(event) {
+  var self = this;
+  return function(data) {
+    self.emit(event, data);
+  }
+}
 
 function buildOpts(tasks, options) {
   var args = []

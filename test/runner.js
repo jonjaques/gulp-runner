@@ -3,30 +3,36 @@ var path = require('path');
 
 var gulpfile = path.resolve(__dirname, 'gulpfile.js');
 var runner = new Runner(gulpfile);
+var runner1 = new Runner(gulpfile);
+var runner2 = new Runner(gulpfile);
 
 runner.on('start', function() {
   console.log('gulp starting...')
 })
 
 runner.on('complete', function() {
-  console.log('complete!')
+  console.log('first gulp... complete!')
 })
 
 runner.on('log', function(data) {
-  // console.log(data)
+  process.stdout.write(data)
 })
 
 runner.on('error', function(err) {
-  console.error(err)
+  process.stdout.write(err)
 })
 
 runner.on('failed', function() {
   console.log('failed. oh no!')
 })
 
-
 runner.run('default')
 
-runner.run('default', function() {
-  console.log('second gulp... done')
+runner1.run('doomed', function(err) {
+  console.log(err)
+  console.log('second gulp... failed')
+})
+
+runner2.run(['default', 'task2'], function() {
+  console.log('third gulp... done')
 })

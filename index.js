@@ -4,6 +4,7 @@ var util = require('util');
 var path = require('path')
 var extend = require('extend');
 var decamelize = require('decamelize');
+var process = require('process');
 
 var DEFAULTS = {
   noColor: true
@@ -31,7 +32,8 @@ GulpRunner.prototype.run = function(tasks, options, cb) {
   tasks = util.isArray(tasks) ? tasks : [tasks];
 
   var gulpBin = require.resolve('gulp/bin/gulp.js')
-  var gulp = child.spawn(gulpBin, buildOpts(tasks, options), {
+  var gulpOpts = [gulpBin].concat(buildOpts(tasks, options))
+  var gulp = child.spawn(process.execPath, gulpOpts, {
     detached: true,
     cwd: __dirname
   })

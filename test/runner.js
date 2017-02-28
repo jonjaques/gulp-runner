@@ -22,10 +22,6 @@ runner.on('error', function(err) {
   process.stdout.write(err)
 })
 
-runner.on('failed', function() {
-  console.log('failed. oh no!')
-})
-
 runner.run('default')
 
 runner1.run('doomed', function(err) {

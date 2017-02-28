@@ -63,9 +63,5 @@ gulp.on('error', function(err: Buffer) {
   process.stderr.write(err);
 })
 
-gulp.on('failed', function() {
-  console.log('failed. oh no!')
-})
-
 gulp.run('default')
 ```

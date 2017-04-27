@@ -52,6 +52,11 @@ GulpRunner.prototype.run = function(tasks, options, cb) {
       cb(null)
     }
   });
+
+  process.on('SIGINT', function() {
+    gulp.kill();
+    process.exit(1);
+  });
 };
 
 function reemit(event) {

@@ -1,6 +1,6 @@
 {
   "name": "gulp-runner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Programmatic API for running gulp tasks.",
   "main": "index.js",
   "scripts": {

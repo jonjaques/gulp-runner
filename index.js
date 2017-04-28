@@ -46,6 +46,7 @@ GulpRunner.prototype.run = function(tasks, options, cb) {
 
   gulp.on('close', function(code) {
     if (code !== 0) {
+      self.emit('failed', code)
       cb(new Error('gulp failed'))
     } else {
       self.emit('complete', code)

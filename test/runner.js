@@ -5,6 +5,11 @@ var gulpfile = path.resolve(__dirname, 'gulpfile.js');
 var runner = new Runner(gulpfile);
 var runner1 = new Runner(gulpfile);
 var runner2 = new Runner(gulpfile);
+var runnerWithOpts = new Runner(gulpfile, {
+	processType: 'fork', 
+	detached: false,
+	silent: true
+})
 
 runner.on('start', function() {
   console.log('gulp starting...')
@@ -30,5 +35,9 @@ runner1.run('doomed', function(err) {
 })
 
 runner2.run(['default', 'task2'], function() {
+  console.log('third gulp... done')
+})
+
+runnerWithOpts.run(['default', 'task2'], function() {
   console.log('third gulp... done')
 })

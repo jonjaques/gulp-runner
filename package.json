@@ -4,7 +4,8 @@
   "description": "Programmatic API for running gulp tasks.",
   "main": "index.js",
   "scripts": {
-    "test": "node test/runner"
+    "test": "jest",
+    "test:debug": "node --debug-brk ./node_modules/.bin/jest --runInBand"
   },
   "author": "Jon Jaques <jaquers@gmail.com>",
   "license": "MIT",
@@ -16,5 +17,8 @@
     "decamelize": "^1.0.0",
     "extend": "^3.0.0",
     "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "jest": "^19.0.2"
   }
 }

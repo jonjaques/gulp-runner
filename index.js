@@ -10,7 +10,14 @@ var DEFAULTS = {
   noColor: true
 }
 
-function GulpRunner(gulpfile) {
+var NODE_DEFAULTS = {
+  processType: 'spawn',
+  detached: true,
+  cwd: __dirname
+}
+
+function GulpRunner(gulpfile, opts) {
+  this.options = extend({}, NODE_DEFAULTS, opts || {})
   this.gulpfile = path.resolve(gulpfile);
 }
 
@@ -30,13 +37,9 @@ GulpRunner.prototype.run = function(tasks, options, cb) {
   options = options || (options = {})
   options.gulpfile = this.gulpfile;
   tasks = util.isArray(tasks) ? tasks : [tasks];
-
   var gulpBin = require.resolve('gulp/bin/gulp.js')
   var gulpOpts = [gulpBin].concat(buildOpts(tasks, options))
-  var gulp = child.spawn(process.execPath, gulpOpts, {
-    detached: true,
-    cwd: __dirname
-  })
+  var gulp = child[this.options.processType](process.execPath, gulpOpts, this.options)
   
   self.emit('start');
   

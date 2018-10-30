@@ -31,7 +31,7 @@ GulpRunner.prototype.run = function(tasks, options, cb) {
   options.gulpfile = this.gulpfile;
   tasks = util.isArray(tasks) ? tasks : [tasks];
 
-  var gulpBin = require.resolve('gulp/bin/gulp.js')
+  var gulpBin = options.gulpBin || require.resolve('gulp/bin/gulp.js')
   var gulpOpts = [gulpBin].concat(buildOpts(tasks, options))
   var gulp = child.spawn(process.execPath, gulpOpts, {
     detached: true,

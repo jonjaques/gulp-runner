@@ -23,6 +23,7 @@ gulp.run('task', function(err) {
 ```
 /* optional cli arguments (camelcased) */
 var opts = {
+  gulpBin: 'path/to/proper/gulp.js', // use when multiple versions of gulp-cli is installed in subprojects
   require: ['coffeescript', 'some-lib'],
   tasksSimple: true,
   production: true   // also accepts arbitrary flags 
